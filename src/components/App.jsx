@@ -5,6 +5,8 @@ import { Container, GlobalStyle } from './GlobalStyle';
 import { fetchImg } from './ApiRequest';
 import { SearchBar } from './Searchbar';
 import { ImageGallery } from './ImageGallery';
+import { Button } from './Button';
+import { Loader } from './Loader';
 
 export class App extends Component {
   state = {
