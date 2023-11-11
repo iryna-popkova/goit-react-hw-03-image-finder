@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { Container, GlobalStyle } from './GlobalStyle';
+import { Container, GlobalStyle } from './GlobalStyles';
 
 import { fetchImg } from './ApiRequest';
 import { SearchBar } from './Searchbar';
@@ -18,12 +18,6 @@ export class App extends Component {
   };
 
   async componentDidMount() {
-    // const savedQuery = window.localStorage.getItem(storageKey);
-    // if (savedQuery !== null) {
-    //   this.setState({
-    //     query: JSON.parse(savedQuery),
-    //   });
-    // }
     try {
       this.setState({ loading: true, error: false });
 
@@ -43,7 +37,6 @@ export class App extends Component {
       prevState.query !== this.state.query ||
       prevState.page !== this.state.page
     ) {
-      // const clearQuery = this.state.query.split('/').pop();
       try {
         this.setState({ loading: true, error: false });
 
@@ -64,7 +57,11 @@ export class App extends Component {
     }
   }
   onSubmit = searchQuery => {
-    this.setState({ searchQuery });
+    this.setState({
+      query: `${searchQuery}`,
+      page: 1,
+      images: [],
+    });
   };
 
   onLoadMore = () => {
@@ -76,15 +73,15 @@ export class App extends Component {
   };
 
   render() {
-    const { images, loading, error } = this.state;
+    const { gallery, loading, error } = this.state;
 
     return (
       <Container>
         <SearchBar submit={this.onSubmit} />
         {error && <p>Something went wrong! Please reload this page!</p>}
-        {images.length > 0 && <ImageGallery images={images} />}
+        {gallery.length > 0 && <ImageGallery images={gallery} />}
         {loading && <Loader />}
-        {images.length > 0 && <Button loadMore={this.onLoadMore} />}
+        {gallery.length > 0 && <Button loadMore={this.onLoadMore} />}
         <GlobalStyle />
         <Toaster />
       </Container>

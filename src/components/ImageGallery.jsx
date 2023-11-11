@@ -6,7 +6,7 @@ export const ImageGallery = ({ images }) => {
   }
 
   return (
-    <ul class="gallery">
+    <ul className="gallery">
       {images.map(image => {
         return (
           <ImageGalleryItem

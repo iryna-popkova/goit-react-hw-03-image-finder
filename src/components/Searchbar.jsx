@@ -1,25 +1,23 @@
-import styles from './src/styles';
-
 export const SearchBar = ({ onSubmit }) => {
   return (
-    <header className={styles.Searchbar}>
+    <header className="searchbar">
       <form
-        class="form"
         onSubmit={event => {
           event.preventDefault();
+          console.log(event.target);
           onSubmit(event.target.value);
           event.target.value = '';
         }}
       >
-        <button type="submit" class="button">
-          <span class="button-label">Search</span>
+        <button type="submit" className="button">
+          <span className="button-label">Search</span>
         </button>
 
         <input
-          class="input"
+          className="input"
           type="text"
-          autocomplete="off"
-          autofocus
+          autoComplete="off"
+          autoFocus
           placeholder="Search images and photos"
         />
       </form>
