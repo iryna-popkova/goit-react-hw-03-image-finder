@@ -1,7 +1,16 @@
+import {
+  Header,
+  SearchForm,
+  SearchFormButton,
+  SearchFormInput,
+} from './Searchbar.styled';
+
+import { AiOutlineSearch } from 'react-icons/ai';
+
 export const SearchBar = ({ onSubmit }) => {
   return (
-    <header className="searchbar">
-      <form
+    <Header className="searchbar">
+      <SearchForm
         onSubmit={event => {
           event.preventDefault();
 
@@ -9,11 +18,11 @@ export const SearchBar = ({ onSubmit }) => {
           onSubmit(formData.get('searchQueryStr'));
         }}
       >
-        <button type="submit" className="button">
-          <span className="button-label">Search</span>
-        </button>
+        <SearchFormButton type="submit" className="button">
+          <AiOutlineSearch size={30} />
+        </SearchFormButton>
 
-        <input
+        <SearchFormInput
           className="input"
           name="searchQueryStr"
           type="text"
@@ -21,7 +30,7 @@ export const SearchBar = ({ onSubmit }) => {
           autoFocus
           placeholder="Search images and photos"
         />
-      </form>
-    </header>
+      </SearchForm>
+    </Header>
   );
 };

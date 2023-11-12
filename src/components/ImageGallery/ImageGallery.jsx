@@ -1,4 +1,5 @@
-import { ImageGalleryItem } from './ImageGalleryItem';
+import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
+import { GalleryList } from './ImageGallery.styled';
 
 export const ImageGallery = ({ images }) => {
   if (images.length === 0) {
@@ -6,7 +7,7 @@ export const ImageGallery = ({ images }) => {
   }
 
   return (
-    <ul className="gallery">
+    <GalleryList className="gallery">
       {images.map(image => {
         return (
           <ImageGalleryItem
@@ -17,6 +18,6 @@ export const ImageGallery = ({ images }) => {
           />
         );
       })}
-    </ul>
+    </GalleryList>
   );
 };

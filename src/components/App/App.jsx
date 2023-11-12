@@ -2,11 +2,11 @@ import { Component } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { Container, GlobalStyle } from './GlobalStyles';
 
-import { fetchImg } from './ApiRequest';
-import { SearchBar } from './Searchbar';
-import { ImageGallery } from './ImageGallery';
-import { Button } from './Button';
-import { Loader } from './Loader';
+import { fetchImg } from '../ApiRequest';
+import { SearchBar } from '../Searchbar/Searchbar';
+import { ImageGallery } from '../ImageGallery/ImageGallery';
+import { Button } from '../button/Button';
+import { Loader } from '../Loader/Loader';
 
 export class App extends Component {
   state = {
@@ -75,7 +75,7 @@ export class App extends Component {
         {error && <p>Something went wrong! Please reload this page!</p>}
         {gallery.length > 0 && <ImageGallery images={gallery} />}
         {loading && <Loader />}
-        {gallery.length > 0 && <Button loadMore={this.onLoadMore} />}
+        {gallery.length > 0 && <Button onLoadMore={this.onLoadMore} />}
         <GlobalStyle />
         <Toaster />
       </Container>

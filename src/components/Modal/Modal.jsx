@@ -1,4 +1,5 @@
 import Modal from 'react-modal';
+import { LargeImage } from './Modal.styled';
 
 const customStyles = {
   content: {
@@ -35,12 +36,12 @@ export const ModalWindow = ({ modalIsOpen, closeModal, largeImage, topic }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
-      onClose={closeModal}
+      onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Image Gallery Modal"
     >
       <div>
-        <img src={largeImage} alt={topic} />
+        <LargeImage src={largeImage} alt={topic} />
       </div>
     </Modal>
   );
