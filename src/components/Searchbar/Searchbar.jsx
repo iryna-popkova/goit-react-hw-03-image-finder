@@ -5,7 +5,7 @@ import {
   SearchFormInput,
 } from './Searchbar.styled';
 
-import { AiOutlineSearch } from 'react-icons/ai';
+import { GoRocket } from 'react-icons/go';
 
 export const SearchBar = ({ onSubmit }) => {
   return (
@@ -19,7 +19,7 @@ export const SearchBar = ({ onSubmit }) => {
         }}
       >
         <SearchFormButton type="submit" className="button">
-          <AiOutlineSearch size={30} />
+          <GoRocket size={30} />
         </SearchFormButton>
 
         <SearchFormInput
