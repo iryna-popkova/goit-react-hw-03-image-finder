@@ -4,9 +4,9 @@ export const SearchBar = ({ onSubmit }) => {
       <form
         onSubmit={event => {
           event.preventDefault();
-          console.log(event.target);
-          onSubmit(event.target.value);
-          event.target.value = '';
+
+          const formData = new FormData(event.currentTarget);
+          onSubmit(formData.get('searchQueryStr'));
         }}
       >
         <button type="submit" className="button">
@@ -15,6 +15,7 @@ export const SearchBar = ({ onSubmit }) => {
 
         <input
           className="input"
+          name="searchQueryStr"
           type="text"
           autoComplete="off"
           autoFocus

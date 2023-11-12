@@ -31,45 +31,39 @@ export class App extends Component {
       this.setState({ loading: false });
     }
   }
-
   async componentDidUpdate(prevProps, prevState) {
     if (
       prevState.query !== this.state.query ||
       prevState.page !== this.state.page
     ) {
       try {
-        this.setState({ loading: true, error: false });
+        this.setState({ isLoading: true, error: false });
 
         const newImages = await fetchImg(this.state.query, this.state.page);
 
-        if (newImages.length === 0) {
-          toast.error('Sorry, no more images available');
+        if (newImages.hits.length === 0) {
+          toast.error('No more images available');
         } else {
           this.setState(prevState => ({
-            images: [...prevState.images, ...newImages],
+            gallery: [...prevState.gallery, ...newImages.hits],
           }));
         }
-      } catch (err0r) {
+      } catch (error) {
         this.setState({ error: true });
       } finally {
-        this.setState({ loading: false });
+        this.setState({ isLoading: false });
       }
     }
   }
+
   onSubmit = searchQuery => {
-    this.setState({
-      query: `${searchQuery}`,
-      page: 1,
-      images: [],
-    });
+    this.setState({ query: searchQuery, page: 1, gallery: [] });
   };
 
   onLoadMore = () => {
-    this.setState(prevState => {
-      return {
-        page: prevState.page + 1,
-      };
-    });
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
   };
 
   render() {
@@ -77,7 +71,7 @@ export class App extends Component {
 
     return (
       <Container>
-        <SearchBar submit={this.onSubmit} />
+        <SearchBar onSubmit={this.onSubmit} />
         {error && <p>Something went wrong! Please reload this page!</p>}
         {gallery.length > 0 && <ImageGallery images={gallery} />}
         {loading && <Loader />}
