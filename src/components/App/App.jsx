@@ -17,25 +17,10 @@ export class App extends Component {
     error: false,
   };
 
-  async componentDidMount() {
-    try {
-      this.setState({ loading: true, error: false });
-
-      const initialImages = await fetchImg(this.state.query, this.state.page);
-      this.setState({
-        gallery: initialImages,
-      });
-    } catch (error) {
-      this.setState({ error: true });
-    } finally {
-      this.setState({ loading: false });
-    }
-  }
   async componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.query !== this.state.query ||
-      prevState.page !== this.state.page
-    ) {
+    const { query, page } = this.state;
+
+    if (prevState.query !== query || prevState.page !== page) {
       try {
         this.setState({ isLoading: true, error: false });
 
@@ -75,7 +60,7 @@ export class App extends Component {
         {error && <p>Something went wrong! Please reload this page!</p>}
         {gallery.length > 0 && <ImageGallery images={gallery} />}
         {loading && <Loader />}
-        {gallery.length > 0 && <Button onLoadMore={this.onLoadMore} />}
+        {gallery.length !== 0 && <Button onLoadMore={this.onLoadMore} />}
         <GlobalStyle />
         <Toaster />
       </Container>
